@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="ie lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>    <html class="ie lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>    <html class="ie lt-ie9"> <![endif]-->
+<!--[if gt IE 8]> <html> <![endif]-->
+<!--[if !IE]><!--><html lang="en"><!-- <![endif]-->
+<head>
+	<title>Happy Birthday</title>
+	<meta charset="UTF-8" />
+	<meta name="description" content="Happy Birthday">
+	<meta name="robots" content="index, follow" />
+    <meta name="keywords" content="Birthday, Happy">
+    <!-- Strat of Facebook Meta -->
+    <meta property="og:type" content="E-Greeting" />
+    <meta property="og:image" content="favicon.ico" />
+    <meta property="og:description" content="Wish you a very Happy Birthday">
+    <!-- End of Facebook Meta Tags -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="stylesheet.css">
+	<link rel="stylesheet" type="text/css" href="loading.css">
+	<link href='http://fonts.googleapis.com/css?family=Signika' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet/less" href="cake.less">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.1.0/less.min.js"></script>
+	<style>
+
+.side {
+    position: fixed;
+    width: 250px; 
+    height: 100%;
+    top: 0;
+    z-index: 0;
+    overflow: hidden;
+}
+
+#left-side {
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8); 
+}
+
+#right-side {
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.8); 
+}
+
+/* Reel image styling */
+.reel-image {
+    position: absolute;
+    width: 250px; 
+    height: auto; 
+    animation-duration: 6s; 
+    animation-timing-function: linear; 
+}
+
+/* Slide up for the left side */
+@keyframes slideUp {
+    0% {
+        bottom: -100%; /* Start below the container */
+    }
+    100% {
+        bottom: 100%; /* End above the container */
+    }
+}
+
+/* Slide down for the right side */
+@keyframes slideDown {
+    0% {
+        top: -100%; /* Start above the container */
+    }
+    100% {
+        top: 100%; /* End below the container */
+    }
+}
+
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background: #ff69b4;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    z-index: 9999;
+}
+
+
+#dark-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+#center-image {
+    max-width: 80%;
+    max-height: 80%;
+    margin-bottom: 20px;
+    border-radius: 10px; /* Optional for rounded corners */
+}
+
+#turn_on {
+    background-color: #f0c420;
+    color: black;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#turn_on:hover {
+    background-color: #ffae00;
+}
+/* Add animation for button appearance */
+.btn-primary {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+/* Keyframes for fade-in-up animation */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .btn-primary {
+        margin-bottom: 10px;
+        width: 90%;
+    }
+}
+@media (max-width: 768px) {
+    .bulb {
+        width: 40px;
+        height: 40px;
+        background-size: 40px 40px;
+    }
+    .cake {
+        transform: scale(0.8);
+    }
+}
+
+
+	</style>
+</head>
+
+<body>
+	<div id="dark-overlay">
+        <p style="font-size: 20px; font-weight: bold; text-align: center; color: black; background-color: yellow; padding: 10px; border: 2px solid black; border-radius: 5px;">
+            <strong>Check this on Laptop</strong>
+        </p>
+        
+        <img src="10.jpg" alt="Center Image" id="center-image">
+        <button class="btn btn-primary" id="turn_on">Turn On the Lights Please and thoda wait krna ..Bhahut kuch hai isme </button>
+		
+    </div>
+	
+	<div class="loading"></div>
+	<audio class="song" controls loop>
+        <source src="hbd.mp3"></source>
+	   Your browser isn't invited for super fun audio time.
+    </audio>
+	<div id="left-side" class="side"></div>
+    <div id="right-side" class="side"></div>
+    <div class="balloons text-center" id="b1">
+    	<h2 style="color:#F2B300;">P</h2>
+    </div>
+    <div class="balloons text-center" id="b2">
+    	<h2 style="color:#0719D4;">I</h2>
+    </div>
+	<div class="balloons text-center" id="b3">
+    	<h2 style="color:#D14D39;">I</h2>
+    </div>
+	<div class="balloons text-center" id="b4">
+    	<h2 style="color:#8FAD00;">S</h2>
+    </div>
+	<div class="balloons text-center" id="b5">
+    	<h2 style="color:#8377E4;">T</h2>
+    </div>
+    <div class="balloons text-center" id="b6">
+    	<h2 style="color:#99C96A;">A</h2>
+    </div>
+
+
+    <img src="Balloon-Border.png" width="100%" class="balloon-border">
+ 
+
+	<div class="container">
+		
+		<div class="row">
+			<div class="col-md-2 col-xs-2 bulb-holder">
+				<div class="bulb" id="bulb_yellow"></div>
+			</div>
+			<div class="col-md-2 col-xs-2 bulb-holder">
+				<div class="bulb" id="bulb_red"></div>
+			</div>
+			<div class="col-md-2 col-xs-2 bulb-holder">
+				<div class="bulb" id="bulb_blue"></div>
+			</div>
+			<div class="col-md-2 col-xs-2 bulb-holder">
+				<div class="bulb" id="bulb_green"></div>
+			</div>
+			<div class="col-md-2 col-xs-2 bulb-holder">
+				<div class="bulb" id="bulb_pink"></div>
+			</div>
+			<div class="col-md-2 col-xs-2 bulb-holder">
+				<div class="bulb" id="bulb_orange"></div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<img src="bannerr1.png" class="bannar">
+			</div>
+		</div>
+		<div class="row cake-cover">
+			<div class="col-md-12 texr-center">
+				<div class="cake">
+				  <div class="velas">
+				    <div class="fuego"></div>
+				    <div class="fuego"></div>
+				    <div class="fuego"></div>
+				    <div class="fuego"></div>
+				    <div class="fuego"></div>
+				  </div>
+				  <div class="cobertura"></div>
+				  <div class="bizcocho"></div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row message">
+			<div class="col-md-12">
+				<p>Today is a beautiful day...</p>
+				<p>because it’s your birthday! 🎉</p>
+                <p>Side ke sare Images Created h according to my Memories</p>
+				<p>Thank you for all the memories we’ve shared,</p>
+				<p>the laughs, the lessons, and even the tough times.</p>
+				<p>Each moment has shaped a unique journey together.</p>
+				<p>On this special day, I wish you endless happiness,</p>
+				<p>strength, and success in everything you do.</p>
+				<p>May this year bring healing, growth, and brighter days ahead.</p>
+				<p>Celebrate today with your brightest smile,</p>
+				<p>because you deserve the world!</p>
+				<p>Happy Birthday, <strong>IPSITA</strong>! 🎂🎈</p>
+				<p>Ye sb toh mene ChatGPT se likhwa liya hai</p>
+				<p>Lakin pta nhi syd tum bhahut aage ho aab</p>
+				<p>Mei aabhi bhi udar vhi memories mei stuck hu </p>
+				<p>Kitna bhi Kosis kru nhi Bhul pata </p>
+				<p>I don't know why me aur hn tumko agar mei exact batau ki  </p>
+				<p>Block hone ke baad mene kitna call kiya toh </p>
+				<p>total <strong>69,686</strong>  calls kiya tha</p>
+				<p>Tum soch skti ho ki sb Ktm aab lakin </p>
+				<p>Trust me... Kbhi nhi...</p>
+				<p>BTW Happy Birthday to you!</p>
+				<p>aur i counted each and every day  </p>
+				<p>215 days hogye h tumko dekhe hue.... </p>
+				<p>I know tumne Pagal Claimned krdiya hoga kbka </p>
+				<p>aab bss kissi se baat krne ka mnn nhi hota </p>
+				<p>Sorry toh glti se bhi nhi boluga .... </p>
+			<p>April 2nd se phaeli wali Ipsita se bss pyaar hai</p>
+			</div>
+			
+		</div>
+		<div class="navbar navbar-fixed-bottom">
+			<div class="row">
+				<div class="col-md-6 text-center col-md-offset-3">
+					
+
+					<button class="btn btn-primary" id="play">Play Music Please, Bina Music Maza nhi aata na</button>
+					<button class="btn btn-primary" id="bannar_coming">I have Decorate Something for YOU</button>
+					<button class="btn btn-primary" id="balloons_flying">Aur ye Balloon gya....</button>
+					<button class="btn btn-primary" id="cake_fadein">Cake aata toh nhi banane lakin tumhare liye Cake bna rha hu </button>
+					<button class="btn btn-primary" id="light_candle">Tum bolo toh mei Light Candle kru?</button>
+					<div id="birthday-message" class="popup">
+						🎉 <strong>HAPPY BIRTHDAY TO YOU! PIISTAAAAAA </strong> 🎂
+					</div>
+					
+					<button class="btn btn-primary" id="wish_message">Ye Balloon idar udar bhahut hai ruko ek sath lata hu</button>
+					<button class="btn btn-primary" id="story">Jada toh nahi tum Tumhare liye kuch likha hu</button>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="effect.js"></script>
+<script>
+// // Array of image URLs (use appropriate paths for your images)
+const images = [
+    '1.jpg', '2.jpg', '3.jpg', '4.jpg',
+    '5.jpg', '6.jpg', '7.jpg', '8.jpg',
+    '9.jpg', '10.jpg', '11.jpg', '12.jpg',
+    '13.jpg', '14.jpg', '15.jpg', '16.jpg',
+    '17.jpg', '18.jpg', '19.jpg', '20.jpg',
+    '21.jpg', '22.jpg', '23.jpg', '24.jpg',
+    '25.jpg', '26.jpg', '27.jpg', '28.jpg',
+];
+
+let lastUsedLeftIndex = -1; 
+let lastUsedRightIndex = -1;
+
+function getRandomImage(excludeIndex) {
+    let index;
+    do {
+        index = Math.floor(Math.random() * images.length);
+    } while (index === excludeIndex); 
+    return index;
+}
+
+function animateReel(side) {
+    const container = document.getElementById(side);
+    const img = document.createElement('img');
+    let randomIndex;
+    if (side === 'left-side') {
+        randomIndex = getRandomImage(lastUsedLeftIndex);
+        lastUsedLeftIndex = randomIndex; 
+    } else if (side === 'right-side') {
+        randomIndex = getRandomImage(lastUsedRightIndex);
+        lastUsedRightIndex = randomIndex; 
+    }
+
+    img.src = images[randomIndex];
+    img.classList.add('reel-image');
+
+    container.appendChild(img);
+    if (side === 'left-side') {
+        img.style.animationName = 'slideUp';
+    } else if (side === 'right-side') {
+        img.style.animationName = 'slideDown';
+    }
+
+    // Remove image after the animation duration
+    setTimeout(() => img.remove(), 6000); // Matches animation duration
+}
+
+function startReelAnimation() {
+    setInterval(() => animateReel('left-side'), 1000); 
+    setInterval(() => animateReel('right-side'), 1000); 
+}
+
+window.onload = startReelAnimation;
+
+</script>
+</html>
